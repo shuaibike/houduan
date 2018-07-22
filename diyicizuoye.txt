@@ -1,0 +1,85 @@
+import java.util.*;
+
+class youxi{
+	int max=100;
+	int min=0;
+	static int[] jilu=new int[100];     //用来记录游戏猜测次数的数组
+	static int p=0;                    //数组的下标
+	public int queren(int b,int a,int t) {   //判断是否猜对
+		if(b>a)
+		{
+			System.out.println("猜大了！");
+			System.out.println();
+		}
+		else if(b<a)
+		{
+			System.out.println("猜小了！");
+			System.out.println();
+		}
+		else if(b==a)
+		{
+			System.out.println("猜对了！");
+			t=1;
+		}
+		return t;
+	}
+	public void kaishi() {            //游戏阶段
+		int k=0;
+		int jishu,i;
+		Random random = new Random();
+	    int a = random.nextInt(max);    //随机生成一个大于等于零并且小于100的整数
+		Scanner f=new Scanner(System.in);
+		System.out.println("数字范围是"+min+"到"+max);
+		for(i=0;;i++)                   //输入数字直到猜对数字
+		{
+			System.out.println("请输入您所猜的数：");
+			int b=f.nextInt();
+			int c=queren(b, a,k); 
+			jishu=i+1;
+			if(c==1)
+				break;
+		}
+		System.out.println("本次游戏猜测的次数为"+jishu+"次");
+		jilu[p]=jishu;       //将每一次游戏的猜测次数存入数组
+		int xiao=jilu[0];
+		for(i=0;i<=p;i++)   //比较得出最少的游戏次数
+		{
+			if(jilu[i]<xiao)
+			{
+				xiao=jilu[i];
+			}
+		}
+		System.out.println("目前为止在所有游戏阶段最少的猜测次数为"+xiao+"次");
+		System.out.println();
+		p++;                  //跳到数组下一格，准备输入下一次游戏的猜测次数
+		xitong();             //游戏阶段结束后返回系统阶段
+	}
+	public void xitong() {              //系统阶段
+		System.out.println("请输入单词begin开始游戏，或者输入单词shutdown结束程序");
+		Scanner in=new Scanner(System.in);
+		String start=in.nextLine();
+		youxi y=new youxi();
+		if(start.equals("begin"))
+		{
+			y.kaishi();     //进入游戏阶段
+		}
+		else if(start.equals("shutdown"))
+		{
+			System.out.println("程序结束！");
+		}
+		else
+		{
+			System.out.println("输入不符合规格！");
+			System.out.println();
+			xitong();        //若输入的字符不符合规格就重新输入
+		}
+	}
+}
+public class yx {
+
+	public static void main(String[] args) {
+		youxi y=new youxi();
+		y.xitong();
+	}
+
+}
