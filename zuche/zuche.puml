@@ -1,0 +1,10 @@
+@startuml
+zaihuoche -> car: jicheng
+zaikeche --> car: jicheng
+pikache -->car:jicheng
+car-->zuche:shuyu
+xianshi-->zuche:shuyu
+jiesuan-->zuche:shuyu
+jiwshu-->zuche:shuyu
+zuche--
+@enduml
